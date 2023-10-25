@@ -27,12 +27,12 @@ function App() {
   useEffect(()=>{
     fetch('http://localhost:6001/listings')
     .then(res => res.json())
-    .then(listings => console.log(listings))
+    .then(listings => setListings(listings))
   },[])
   return (
     <div className="app">
       <Header />
-      <ListingsContainer />
+      <ListingsContainer listings={listings}/>
     </div>
   );
 }
