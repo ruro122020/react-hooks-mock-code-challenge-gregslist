@@ -2,7 +2,7 @@ import React from "react";
 import ListingCard from "./ListingCard";
 
 function ListingsContainer({listings}) {
-  const displayListings = listings.map(listing => <ListingCard listing={listing}/>)
+  const displayListings = listings.map(listing => <ListingCard key={listing.id} listing={listing}/>)
   return (
     <main>
       <ul className="cards">

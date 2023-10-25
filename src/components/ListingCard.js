@@ -1,7 +1,16 @@
 import React from "react";
 
 function ListingCard({listing}) {
-  const {image, description, location} = listing
+  const {id, image, description, location} = listing
+
+  //function to delete listing from server
+  const handleDeleteClick=()=>{
+    fetch(`http://localhost:6001/listings/${id}`,{
+      method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(()=>console.log('deleted!'))
+  }
   return (
     <li className="card">
       <div className="image">
@@ -16,7 +25,7 @@ function ListingCard({listing}) {
         )}
         <strong>{description}</strong>
         <span> · {location}</span>
-        <button className="emoji-button delete">🗑</button>
+        <button onClick={handleDeleteClick} className="emoji-button delete">🗑</button>
       </div>
     </li>
   );
