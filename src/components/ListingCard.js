@@ -1,6 +1,6 @@
 import React from "react";
 
-function ListingCard({listing}) {
+function ListingCard({listing, onDeleteListing}) {
   const {id, image, description, location} = listing
 
   //function to delete listing from server
@@ -9,7 +9,7 @@ function ListingCard({listing}) {
       method: 'DELETE'
     })
     .then(res => res.json())
-    .then(()=>console.log('deleted!'))
+    .then(()=> onDeleteListing(listing))
   }
   return (
     <li className="card">

@@ -32,7 +32,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <ListingsContainer listings={listings}/>
+      <ListingsContainer listings={listings} setListings={setListings}/>
     </div>
   );
 }
