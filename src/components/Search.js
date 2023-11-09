@@ -5,7 +5,6 @@ function Search({ onSearchSubmit }) {
   function handleSubmit(e) {
     e.preventDefault();
     onSearchSubmit(searchValue)
-    console.log("submitted");
   }
 
   return (

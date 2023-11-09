@@ -34,12 +34,12 @@ function App() {
     setSearch(inputSearch)
   }
   const filteredListings = listings.filter(listing => {
-    console.log(search)
-    console.log(listing.description.toLowerCase().includes(search.toLowerCase()))
     if (listing.description.toLowerCase().includes(search.toLowerCase())) {
       return true
     }
   })
+  console.log(search)
+  console.log(filteredListings)
   return (
     <div className="app">
       <Header onSearchSubmit={handleSearchSubmit} />
