@@ -17,22 +17,33 @@
       -delete the listing from the server
       -delete the listing from the DOM
 */
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import ListingsContainer from "./ListingsContainer";
 
 function App() {
   const [listings, setListings] = useState([])
+  const [search, setSearch] = useState('')
   //fetch requests
-  useEffect(()=>{
+  useEffect(() => {
     fetch('http://localhost:6001/listings')
-    .then(res => res.json())
-    .then(listings => setListings(listings))
-  },[])
+      .then(res => res.json())
+      .then(listings => setListings(listings))
+  }, [])
+  const handleSearchSubmit = (inputSearch) => {
+    setSearch(inputSearch)
+  }
+  const filteredListings = listings.filter(listing => {
+    console.log(search)
+    console.log(listing.description.toLowerCase().includes(search.toLowerCase()))
+    if (listing.description.toLowerCase().includes(search.toLowerCase())) {
+      return true
+    }
+  })
   return (
     <div className="app">
-      <Header />
-      <ListingsContainer listings={listings} setListings={setListings}/>
+      <Header onSearchSubmit={handleSearchSubmit} />
+      <ListingsContainer listings={filteredListings} setListings={setListings} />
     </div>
   );
 }
