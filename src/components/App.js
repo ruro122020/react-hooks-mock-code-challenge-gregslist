@@ -4,6 +4,7 @@
   3. I can remove a listing from the page by clicking the trash can icon. This change should be persisted in the backend.
   4. I can search for listings by their name.
   All required deliverables are done
+  Advanced Deliverables are done
 */
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
