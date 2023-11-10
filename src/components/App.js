@@ -8,28 +8,49 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import ListingsContainer from "./ListingsContainer";
+import ItemForm from "./ItemForm";
 
 function App() {
   const [listings, setListings] = useState([])
   const [search, setSearch] = useState('')
+  const [sort, setSort] = useState('')
+
   useEffect(() => {
     fetch('http://localhost:6001/listings')
       .then(res => res.json())
       .then(listings => setListings(listings))
   }, [])
+
   const handleSearchSubmit = (inputSearch) => {
     setSearch(inputSearch)
   }
+
+  const handleAddNewItem = (newItem) => {
+    setListings([...listings, newItem])
+  }
+
   const filteredListings = listings.filter(listing => {
     if (listing.description.toLowerCase().includes(search.toLowerCase())) {
       return true
     }
   })
-  console.log(search)
-  console.log(filteredListings)
+    .sort((locationA, locationB) => {
+      if (sort) {
+        const nameA = locationA.location.toUpperCase();
+        const nameB = locationB.location.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      }
+    })
   return (
     <div className="app">
-      <Header onSearchSubmit={handleSearchSubmit} />
+      <Header onSearchSubmit={handleSearchSubmit} setSort={setSort} />
+      <ItemForm onAddNewItem={handleAddNewItem} />
       <ListingsContainer listings={filteredListings} setListings={setListings} />
     </div>
   );
